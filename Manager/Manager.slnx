@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="ExpenseManager.Common/ExpenseManager.Common.csproj" />
+  <Project Path="ExpenseManager.Console/ExpenseManager.ConsoleApp.csproj" />
+  <Project Path="ExpenseManager.DBModels/ExpenseManager.DBModels.csproj" />
+  <Project Path="ExpenseManager.Services/ExpenseManager.Services.csproj" />
+  <Project Path="ExpenseManager.UIModels/ExpenseManager.UIModels.csproj" />
+</Solution>
