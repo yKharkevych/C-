@@ -4,4 +4,5 @@
   <Project Path="ExpenseManager.DBModels/ExpenseManager.DBModels.csproj" />
   <Project Path="ExpenseManager.Services/ExpenseManager.Services.csproj" />
   <Project Path="ExpenseManager.UIModels/ExpenseManager.UIModels.csproj" />
+  <Project Path="ExpenseManager/ExpenseManager.csproj" Id="0cb4a5ce-44a5-4507-96c6-dba4afaa9077" />
 </Solution>
