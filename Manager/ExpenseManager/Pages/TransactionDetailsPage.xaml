@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:Manager.ExpenseManager.UIModels;assembly=ExpenseManager.UIModels"
+             x:Class="Manager.ExpenseManager.Pages.TransactionDetailsPage"
+             x:DataType="models:TransactionUI"
+             Title="Transaction Details Page">
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="30,20"
+            Spacing="1">
+            <Label
+                Text="Amount"
+                FontSize="20"
+                FontAttributes="Bold"
+                TextColor="Black"></Label>  
+            <Label
+                Margin="15,0,0,15"
+                FontSize="14">
+                <MultiBinding StringFormat="{}{0}{1}">
+                    <Binding Path="InOutCome"/>
+                    <Binding Path="Amount"/>
+                </MultiBinding>
+            </Label>
+            <Label
+                Text="Category"
+                FontSize="20"
+                FontAttributes="Bold"
+                TextColor="Black"></Label>
+            <Label
+                Text="{Binding Category}"
+                Margin="15,0,0,15"
+                FontSize="14"></Label>
+            <Label
+                Text="Date"
+                FontSize="20"
+                FontAttributes="Bold"
+                TextColor="Black"></Label>
+            <Label
+                Text="{Binding DateDisplay}"
+                Margin="15,0,0,15"
+                FontSize="14"></Label>
+            <Label
+                Text="Description"
+                FontSize="20"
+                FontAttributes="Bold"
+                TextColor="Black"></Label>
+            <Label
+                Text="{Binding Description}" 
+                Margin="15,0,0,15"
+                FontSize="14"></Label>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

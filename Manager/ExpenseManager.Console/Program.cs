@@ -18,12 +18,12 @@ namespace Manager.ExpenseManager.ConsoleApp
         }
 
         private static AppState _appState = AppState.Default;
-        private static StorageService _storageService;
+        private static IStorageService _storageService;
         private static List<PurseUI> _purses;
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Вітаємо у Expense Manager App!");
+            Console.WriteLine("Welcome to Expense Manager App!");
             _storageService = new StorageService();
             int? command = 0;
             while (_appState != AppState.Exit)
@@ -80,8 +80,8 @@ namespace Manager.ExpenseManager.ConsoleApp
             _purses = new List<PurseUI>();
             foreach (var purseDB in _storageService.GetAllPurses())
             {
-                var purseUI = new PurseUI(purseDB);
-                purseUI.LoadTransactions(_storageService);
+                var purseUI = new PurseUI(_storageService, purseDB);
+                purseUI.LoadTransactions();
                 _purses.Add(purseUI);
             }
         }
@@ -103,7 +103,7 @@ namespace Manager.ExpenseManager.ConsoleApp
                 if(purse.Name == name)
                 {
                     found = true;
-                    purse.LoadTransactions(_storageService);
+                    purse.LoadTransactions();
                     Console.WriteLine($"Транзакції для гаманця {purse.Name}:");
                     foreach(var transaction in purse.Transactions)
                     {

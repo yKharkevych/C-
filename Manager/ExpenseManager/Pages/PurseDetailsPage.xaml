@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:Manager.ExpenseManager.Pages"
+             xmlns:models="clr-namespace:Manager.ExpenseManager.UIModels;assembly=ExpenseManager.UIModels" 
+             x:Class="Manager.ExpenseManager.Pages.PurseDetailsPage"
+             x:DataType="models:PurseUI"
+             Title="Purse Details">
+    <Grid
+        RowDefinitions="Auto, *">
+        <VerticalStackLayout
+            Padding="20">
+            <Label 
+                 FontSize="20"
+                 FontAttributes="Bold"
+                 TextColor="Black">
+                <MultiBinding
+                     StringFormat="{}{0} ({1})">
+                    <Binding Path="Name"/>
+                    <Binding Path="Currency"/>
+                </MultiBinding>
+            </Label>
+            <Label 
+                 Text="{Binding BalanceDesc}"/>
+        </VerticalStackLayout>
+
+        <CollectionView
+            ItemsSource="{Binding Transactions}"
+            SelectionMode="Single"
+            SelectionChanged="TransactionSelected"
+            Margin="20,10"
+            Grid.Row="1">
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="7" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate
+                x:DataType="models:TransactionUI">
+                    <Grid Padding="0, 5">
+                        <Border
+                            Stroke="MidnightBlue"
+                            Padding="13"
+                            HorizontalOptions="Fill">
+                            <VerticalStackLayout>
+                                <Label 
+                                    FontSize="18"
+                                    FontAttributes="Bold"
+                                    TextColor="Black">
+                                    <MultiBinding StringFormat="{}{0}{1}">
+                                        <Binding Path="InOutCome"/>
+                                        <Binding Path="Amount"/>
+                                    </MultiBinding>
+                                </Label>
+                                <Label Text="{Binding Category}"/>
+                            </VerticalStackLayout>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

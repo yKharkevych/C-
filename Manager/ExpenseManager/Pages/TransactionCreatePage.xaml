@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Manager.ExpenseManager.Pages.TransactionCreatePage"
+             Title="Create new Transaction">
+    <ScrollView>
+        <VerticalStackLayout>
+            <Label 
+                Text="Description"
+                Margin="80,0,0,0" 
+                FontAttributes="Bold"></Label>
+            <Entry
+                x:Name="eDescription"
+                 Placeholder="Description"
+                 HorizontalOptions="Fill"
+                 Margin="40,0,40,0"></Entry>
+            <Label 
+                Text="Amount"
+                Margin="80,20,0,0" 
+                FontAttributes="Bold"></Label>
+            <Entry
+                x:Name="eAmount"
+                Placeholder="0.00"
+                Keyboard="Numeric"
+                HorizontalOptions="Fill"
+                Margin="40,0,40,0"></Entry>
+            <Label 
+                Text="Category"
+                Margin="80,20,0,0" 
+                FontAttributes="Bold"></Label>
+            <Picker
+                x:Name="pCategory"
+                Margin="40,0,40,0"
+                ItemDisplayBinding="{Binding DisplayName}"></Picker>
+            <Label 
+                Text="Date"
+                Margin="80,20,0,0" 
+                FontAttributes="Bold"></Label>
+            <DatePicker
+                x:Name="dDate"
+                Margin="40,0,0,0"></DatePicker>
+
+            <Grid
+                ColumnDefinitions="*,*"
+                Padding="40, 20, 40, 20"
+                ColumnSpacing="20">
+                <Button
+                    Grid.Column="0"
+                    Text="Create transaction"
+                    Clicked="CreateClicked"></Button>
+                <Button
+                    Grid.Column="1"
+                    Text="Back"
+                    Clicked="BackClicked"></Button>
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

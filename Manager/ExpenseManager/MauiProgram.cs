@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Manager.ExpenseManager.Pages;
+using Manager.ExpenseManager.Services;
+using Microsoft.Extensions.Logging;
 
 namespace Manager.ExpenseManager
 {
@@ -18,6 +20,11 @@ namespace Manager.ExpenseManager
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+            builder.Services.AddSingleton<IStorageService, StorageService>();
+
+            builder.Services.AddSingleton<PursesPage>();
+            builder.Services.AddTransient<PurseDetailsPage>();
+            builder.Services.AddTransient<TransactionDetailsPage>();
 
             return builder.Build();
         }

@@ -28,9 +28,9 @@ namespace Manager.ExpenseManager.Services
         static FakeStorage()
         {
             var cash = new PurseDB("Готівка", Currency.UAH, 1000);
-            var monoUAH = new PurseDB("Монобанк (UAH)", Currency.UAH, 12645);
-            var monoUSD = new PurseDB("Монобанк (USD)", Currency.USD, 580);
-            var cashPLN = new PurseDB("Готівка (PLN)", Currency.PLN, 1730.50m);
+            var monoUAH = new PurseDB("Монобанк", Currency.UAH, 12645);
+            var monoUSD = new PurseDB("Монобанк", Currency.USD, 580);
+            var cashPLN = new PurseDB("Готівка", Currency.PLN, 1730.50m);
             _purses = new List<PurseDB> {cash, monoUAH, monoUSD, cashPLN };
 
             var t1 = new TransactionDB(cash.Id, -50, Category.Cafe, new DateTime(2026,3,7,15,34,56), "Купівля кави");

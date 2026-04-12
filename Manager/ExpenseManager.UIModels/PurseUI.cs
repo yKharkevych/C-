@@ -10,11 +10,12 @@ namespace Manager.ExpenseManager.UIModels
 {
     public class PurseUI
     {
+        private readonly IStorageService _storage;
         private PurseDB _db;
         private string _name;
         private Currency _currency;
         private decimal _startBalance;
-        private readonly List<TransactionUI> _transactions;
+        private List<TransactionUI> _transactions;
 
         public Guid? Id
         {
@@ -39,16 +40,31 @@ namespace Manager.ExpenseManager.UIModels
         }
         public decimal Balance
         {
-            get => _startBalance + Transactions.Sum(t => t.Amount);
+            get => _startBalance + (Transactions?.Sum(t => t.Amount) ?? 0);
         }
 
-        public PurseUI()
+        public string BalanceDesc
+        {
+            get
+            {
+                var transactionsSum = Transactions?.Sum(t => t.Amount);
+
+                if (transactionsSum == null)
+                    return "Balance Not Loaded";
+
+                return $"{_startBalance + transactionsSum.Value} {Currency}";
+            }
+        }
+
+        public PurseUI(IStorageService storage)
         {
             _transactions = new List<TransactionUI>();
+            _storage = storage;
         }
 
-        public PurseUI(PurseDB db) : this()
+        public PurseUI(IStorageService storage, PurseDB db) 
         {
+            _storage = storage;
             _db = db;
             _name = db.Name;
             _currency = db.Currency;
@@ -67,11 +83,12 @@ namespace Manager.ExpenseManager.UIModels
             }
         }
 
-        public void LoadTransactions(StorageService storage)
+        public void LoadTransactions()
         {
-            if (Id == null || _transactions.Count() > 0)
+            if (Id == null || _transactions != null)
                 return;
-            foreach (var transactionDB in storage.GetTransactions(Id.Value))
+            _transactions = new List<TransactionUI>();
+            foreach (var transactionDB in _storage.GetTransactions(Id.Value))
             {
                 _transactions.Add(new TransactionUI(transactionDB));
             }
@@ -79,7 +96,7 @@ namespace Manager.ExpenseManager.UIModels
 
         override public string ToString()
         {
-            return $"{Name} ({Currency}), Баланс: {Balance}";
+            return $"{Name} ({Currency}), Balance: {Balance} {Currency}";
         }
     }
 }

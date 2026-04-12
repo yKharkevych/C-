@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:Manager.ExpenseManager.Pages"
+             xmlns:models="clr-namespace:Manager.ExpenseManager.UIModels;assembly=ExpenseManager.UIModels" 
+             x:Class="Manager.ExpenseManager.Pages.PursesPage"
+             x:DataType="pages:PursesPage"
+             Title="PursesPage">
+    <CollectionView
+        ItemsSource="{Binding Purses}"
+        SelectionMode="Single"
+        Margin="20"
+        SelectionChanged="PurseSelected">
+        
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Vertical" ItemSpacing="9" />
+        </CollectionView.ItemsLayout>
+        
+        <CollectionView.ItemTemplate>
+            <DataTemplate
+                x:DataType="models:PurseUI">
+                <Border
+                    Stroke="MidnightBlue"
+                    Padding="13"
+                    HorizontalOptions="Fill">
+                    <VerticalStackLayout>
+                        <Label 
+                            FontSize="20"
+                            FontAttributes="Bold"
+                            TextColor="Black">
+                            <MultiBinding
+                                StringFormat="{}{0} ({1})">
+                                <Binding Path="Name"/>
+                                <Binding Path="Currency"/>
+                            </MultiBinding>
+                        </Label>
+                        <Label 
+                            Text="{Binding BalanceDesc}"/>
+                    </VerticalStackLayout>
+                </Border>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentPage>

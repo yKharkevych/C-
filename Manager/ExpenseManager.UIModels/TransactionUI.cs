@@ -2,6 +2,7 @@
 using Manager.ExpenseManager.DBModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 
 namespace Manager.ExpenseManager.UIModels
@@ -48,6 +49,17 @@ namespace Manager.ExpenseManager.UIModels
         {
             get => _isExpense;
         }
+
+        public string InOutCome
+        {
+            get
+            {
+                if (IsExpense) return "";
+                return "+";
+            }
+        }
+
+        public string DateDisplay => Date.ToString("MMMM dd, yyyy", new CultureInfo("en-US"));
 
         public TransactionUI(Guid purseId)
         {

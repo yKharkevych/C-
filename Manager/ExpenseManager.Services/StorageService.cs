@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Manager.ExpenseManager.Services
 {
-    public class StorageService
+    public class StorageService : IStorageService
     {
         private List<PurseDB> _purses;
         private  List<TransactionDB> _transactions;
