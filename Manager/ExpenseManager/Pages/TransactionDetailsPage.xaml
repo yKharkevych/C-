@@ -6,6 +6,7 @@
              x:DataType="models:TransactionUI"
              Title="Transaction Details Page">
     <ScrollView>
+        <!-- Відображення деталей транзакції -->
         <VerticalStackLayout
             Padding="30,20"
             Spacing="1">

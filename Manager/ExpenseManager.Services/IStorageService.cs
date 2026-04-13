@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Manager.ExpenseManager.Services
 {
+    // Інтерфейс для сервісу зберігання даних, який визначає методи для отримання транзакцій та гаманців
     public interface IStorageService
     {
         public IEnumerable<TransactionDB> GetTransactions(Guid purseId);

@@ -59,6 +59,7 @@ namespace Manager.ExpenseManager.UIModels
             }
         }
 
+        // Властивість для відображення дати
         public string DateDisplay => Date.ToString("MMMM dd, yyyy", new CultureInfo("en-US"));
 
         public TransactionUI(Guid purseId)

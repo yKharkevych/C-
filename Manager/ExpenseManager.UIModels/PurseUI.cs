@@ -43,6 +43,7 @@ namespace Manager.ExpenseManager.UIModels
             get => _startBalance + (Transactions?.Sum(t => t.Amount) ?? 0);
         }
 
+        // Властивість для відображення балансу у вигляді рядка
         public string BalanceDesc
         {
             get

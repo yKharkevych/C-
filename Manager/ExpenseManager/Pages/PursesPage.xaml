@@ -6,6 +6,8 @@
              x:Class="Manager.ExpenseManager.Pages.PursesPage"
              x:DataType="pages:PursesPage"
              Title="PursesPage">
+
+    <!-- Відображення списку гаманців користувача -->
     <CollectionView
         ItemsSource="{Binding Purses}"
         SelectionMode="Single"

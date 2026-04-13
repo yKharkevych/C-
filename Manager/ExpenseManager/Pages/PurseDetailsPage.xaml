@@ -8,6 +8,7 @@
              Title="Purse Details">
     <Grid
         RowDefinitions="Auto, *">
+        <!-- Заголовок, що складається з назви гаманця, валюти та балансу -->
         <VerticalStackLayout
             Padding="20">
             <Label 
@@ -24,6 +25,7 @@
                  Text="{Binding BalanceDesc}"/>
         </VerticalStackLayout>
 
+        <!-- Колекція транзакцій, що відображає список транзакцій для цього гаманця -->
         <CollectionView
             ItemsSource="{Binding Transactions}"
             SelectionMode="Single"
