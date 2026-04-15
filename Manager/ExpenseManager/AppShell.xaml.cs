@@ -8,8 +8,8 @@ namespace Manager.ExpenseManager
         {
             InitializeComponent();
             // Реєструємо маршрути для навігації між сторінками
-            Routing.RegisterRoute("PursesPage/PurseDetailsPage", typeof(PurseDetailsPage));
-            Routing.RegisterRoute("PursesPage/PurseDetailsPage/TransactionDetailsPage", typeof(TransactionDetailsPage));
+            Routing.RegisterRoute(nameof(PurseDetailsPage), typeof(PurseDetailsPage));
+            Routing.RegisterRoute(nameof(TransactionDetailsPage), typeof(TransactionDetailsPage));
         }
     }
 }

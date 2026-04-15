@@ -7,6 +7,7 @@ using System.Text;
 
 namespace Manager.ExpenseManager.UIModels
 {
+    [Obsolete("Цей клас використовується лише для тестування і не є частиною реального сховища даних. Він може бути видалений або замінений у майбутньому.", true)]
     public class TransactionUI
     {
         private TransactionDB _db;

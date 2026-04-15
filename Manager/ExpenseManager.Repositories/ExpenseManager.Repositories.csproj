@@ -4,13 +4,11 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>Manager.ExpenseManager.Services</RootNamespace>
+    <RootNamespace>Manager.ExpenseManager.Repositories</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ExpenseManager.DBModels\ExpenseManager.DBModels.csproj" />
-    <ProjectReference Include="..\ExpenseManager.DTOModels\ExpenseManager.DTOModels.csproj" />
-    <ProjectReference Include="..\ExpenseManager.Repositories\ExpenseManager.Repositories.csproj" />
     <ProjectReference Include="..\ExpenseManager.Storage\ExpenseManager.Storage.csproj" />
   </ItemGroup>
 

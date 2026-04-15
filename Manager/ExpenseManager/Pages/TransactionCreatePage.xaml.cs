@@ -1,5 +1,4 @@
 using Manager.ExpenseManager.Common;
-using Manager.ExpenseManager.UIModels;
 namespace Manager.ExpenseManager.Pages;
 
 public partial class TransactionCreatePage : ContentPage
@@ -8,11 +7,11 @@ public partial class TransactionCreatePage : ContentPage
 	{
 		InitializeComponent();
 
-		pCategory.ItemsSource = EnumExtensions.GetValuesWithNames<Category>();
+		//pCategory.ItemsSource = EnumExtensions.GetValuesWithNames<Category>();
 	}
 
     //метод обробки кнопки створення транзакції. Перевіряє правильність введених даних, створює об'єкт TransactionUI та відображає повідомлення про успішне створення транзакції.
-    private void CreateClicked(object sender, EventArgs e)
+   /* private void CreateClicked(object sender, EventArgs e)
 	{
         if (String.IsNullOrEmpty(eDescription.Text))
         {
@@ -52,5 +51,5 @@ public partial class TransactionCreatePage : ContentPage
     private void BackClicked(object sender, EventArgs e)
     {
 
-    }
+    }*/
 }

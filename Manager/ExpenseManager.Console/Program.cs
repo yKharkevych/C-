@@ -1,5 +1,7 @@
-﻿using Manager.ExpenseManager.Services;
-using Manager.ExpenseManager.UIModels;
+﻿using Manager.ExpenseManager.DTOModels.Purses;
+using Manager.ExpenseManager.Repositories;
+using Manager.ExpenseManager.Services;
+using Manager.ExpenseManager.Storage;
 using System;
 using System.Collections.Generic;
 using System.Net.NetworkInformation;
@@ -18,13 +20,20 @@ namespace Manager.ExpenseManager.ConsoleApp
         }
 
         private static AppState _appState = AppState.Default;
-        private static IStorageService _storageService;
-        private static List<PurseUI> _purses;
+        private static IPurseService _purseService;
+        private static ITransactionService _transactionService;
+        private static List<PurseListDTO> _purses;
+
 
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Expense Manager App!");
-            _storageService = new StorageService();
+            var storageContext = new InMemoryStorageContext();
+            var purseRepo = new PurseRepository(storageContext);
+            var transactionRepo = new TransactionRepository(storageContext);
+
+            _purseService = new PurseService(purseRepo, transactionRepo);
+            _transactionService = new TransactionService(transactionRepo);
             int? command = 0;
             while (_appState != AppState.Exit)
             {
@@ -77,12 +86,10 @@ namespace Manager.ExpenseManager.ConsoleApp
         {
             if (_purses != null)
                 return;
-            _purses = new List<PurseUI>();
-            foreach (var purseDB in _storageService.GetAllPurses())
+            _purses = new List<PurseListDTO>();
+            foreach (var purse in _purseService.GetPurses())
             {
-                var purseUI = new PurseUI(_storageService, purseDB);
-                purseUI.LoadTransactions();
-                _purses.Add(purseUI);
+                _purses.Add(purse);
             }
         }
 
@@ -103,9 +110,8 @@ namespace Manager.ExpenseManager.ConsoleApp
                 if(purse.Name == name)
                 {
                     found = true;
-                    purse.LoadTransactions();
                     Console.WriteLine($"Транзакції для гаманця {purse.Name}:");
-                    foreach(var transaction in purse.Transactions)
+                    foreach(var transaction in _transactionService.GetTransactionsByPurseId(purse.Id))
                     {
                         Console.WriteLine(transaction);
                     }

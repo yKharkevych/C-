@@ -1,8 +1,10 @@
 <Solution>
-  <Project Path="ExpenseManager.Common/ExpenseManager.Common.csproj" />
-  <Project Path="ExpenseManager.Console/ExpenseManager.ConsoleApp.csproj" />
-  <Project Path="ExpenseManager.DBModels/ExpenseManager.DBModels.csproj" />
-  <Project Path="ExpenseManager.Services/ExpenseManager.Services.csproj" />
-  <Project Path="ExpenseManager.UIModels/ExpenseManager.UIModels.csproj" />
-  <Project Path="ExpenseManager/ExpenseManager.csproj" Id="0cb4a5ce-44a5-4507-96c6-dba4afaa9077" />
+  <Project Path="D:/Project_m/Manager/ExpenseManager.Common/ExpenseManager.Common.csproj" />
+  <Project Path="D:/Project_m/Manager/ExpenseManager.Console/ExpenseManager.ConsoleApp.csproj" />
+  <Project Path="D:/Project_m/Manager/ExpenseManager.DBModels/ExpenseManager.DBModels.csproj" />
+  <Project Path="D:/Project_m/Manager/ExpenseManager.DTOModels/ExpenseManager.DTOModels.csproj" Id="5172ee46-2c2d-42dd-8387-010c9424fc70" />
+  <Project Path="D:/Project_m/Manager/ExpenseManager.Repositories/ExpenseManager.Repositories.csproj" Id="4025f937-ad3f-4619-a33d-a5903a93a2b2" />
+  <Project Path="D:/Project_m/Manager/ExpenseManager.Services/ExpenseManager.Services.csproj" />
+  <Project Path="D:/Project_m/Manager/ExpenseManager.Storage/ExpenseManager.Storage.csproj" Id="bfbd82dc-76d7-421e-99d0-93ce7a3dc0d2" />
+  <Project Path="D:/Project_m/Manager/ExpenseManager/ExpenseManager.csproj" Id="0cb4a5ce-44a5-4507-96c6-dba4afaa9077" />
 </Solution>

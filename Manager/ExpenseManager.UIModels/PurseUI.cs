@@ -5,9 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
 using System.Text;
+using System.Transactions;
 
 namespace Manager.ExpenseManager.UIModels
 {
+    [Obsolete("Цей клас використовується лише для тестування і не є частиною реального сховища даних. Він може бути видалений або замінений у майбутньому.", true)]
     public class PurseUI
     {
         private readonly IStorageService _storage;
@@ -63,7 +65,7 @@ namespace Manager.ExpenseManager.UIModels
             _storage = storage;
         }
 
-        public PurseUI(IStorageService storage, PurseDB db) 
+        public PurseUI(IStorageService storage, PurseDB db)
         {
             _storage = storage;
             _db = db;
@@ -101,3 +103,4 @@ namespace Manager.ExpenseManager.UIModels
         }
     }
 }
+

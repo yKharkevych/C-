@@ -1,6 +1,9 @@
 ﻿using Manager.ExpenseManager.Pages;
 using Manager.ExpenseManager.Services;
+using Manager.ExpenseManager.Storage;
+using Manager.ExpenseManager.Repositories;
 using Microsoft.Extensions.Logging;
+using Manager.ExpenseManager.ViewModel;
 
 namespace Manager.ExpenseManager
 {
@@ -20,13 +23,24 @@ namespace Manager.ExpenseManager
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
-            // Реєструємо сервіс зберігання даних, щоб він був доступний протягом усього життєвого циклу додатку
-            builder.Services.AddSingleton<IStorageService, StorageService>();
+            // Registering services and repositories for dependency injection
+            builder.Services.AddSingleton<IStorageContext, InMemoryStorageContext>();
+            builder.Services.AddSingleton<ITransactionRepository, TransactionRepository>();
+            builder.Services.AddSingleton<IPurseRepository, PurseRepository>();
 
-            // Реєструємо сторінки додатку, щоб вони могли бути створені та використані для навігації
+            // Registering services for handling business logic related to purses and transactions
+            builder.Services.AddSingleton<IPurseService, PurseService>();
+            builder.Services.AddSingleton<ITransactionService, TransactionService>();
+            
+            // Registering pages and their corresponding view models for navigation and data binding
             builder.Services.AddSingleton<PursesPage>();
             builder.Services.AddTransient<PurseDetailsPage>();
             builder.Services.AddTransient<TransactionDetailsPage>();
+
+            // Registering view models for the pages, with appropriate lifetimes 
+            builder.Services.AddSingleton<PursesVM>();
+            builder.Services.AddTransient<PurseDetailsVM>();
+            builder.Services.AddTransient<TransactionDetailsVM>();
 
             return builder.Build();
         }

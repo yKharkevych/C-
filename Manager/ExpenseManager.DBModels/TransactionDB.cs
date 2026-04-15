@@ -16,13 +16,13 @@ namespace Manager.ExpenseManager.DBModels
         public DateTime Date { get; set; }
         public string Description { get; set; }    
 
-        public TransactionDB()
+        public TransactionDB(Guid purseId, decimal amount, Category category, DateTime date, string description) : this(Guid.NewGuid(), purseId, amount, category, date, description)
         {
         }
 
-        public TransactionDB(Guid purseId, decimal amount, Category category, DateTime date, string description)
+        public TransactionDB(Guid id, Guid purseId, decimal amount, Category category, DateTime date, string description)
         {
-            Id = Guid.NewGuid(); // Генеруємо унікальний ідентифікатор при створенні нової транзакції
+            Id = id; // Генеруємо унікальний ідентифікатор при створенні нової транзакції
             PurseId = purseId;
             Amount = amount;
             Category = category;

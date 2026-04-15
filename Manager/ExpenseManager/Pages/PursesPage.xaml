@@ -2,17 +2,19 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:Manager.ExpenseManager.Pages"
-             xmlns:models="clr-namespace:Manager.ExpenseManager.UIModels;assembly=ExpenseManager.UIModels" 
+             xmlns:models="clr-namespace:Manager.ExpenseManager.DTOModels.Purses;assembly=ExpenseManager.DTOModels" 
+             xmlns:vm="clr-namespace:Manager.ExpenseManager.ViewModel"
              x:Class="Manager.ExpenseManager.Pages.PursesPage"
-             x:DataType="pages:PursesPage"
+             x:DataType="vm:PursesVM"
              Title="PursesPage">
 
     <!-- Відображення списку гаманців користувача -->
     <CollectionView
         ItemsSource="{Binding Purses}"
         SelectionMode="Single"
-        Margin="20"
-        SelectionChanged="PurseSelected">
+        SelectedItem="{Binding SelectedPurse}"
+        SelectionChangedCommand="{Binding PurseSelectedCommand}"
+        Margin="20">
         
         <CollectionView.ItemsLayout>
             <LinearItemsLayout Orientation="Vertical" ItemSpacing="9" />
@@ -20,7 +22,7 @@
         
         <CollectionView.ItemTemplate>
             <DataTemplate
-                x:DataType="models:PurseUI">
+                x:DataType="models:PurseListDTO">
                 <Border
                     Stroke="MidnightBlue"
                     Padding="13"
@@ -37,7 +39,7 @@
                             </MultiBinding>
                         </Label>
                         <Label 
-                            Text="{Binding BalanceDesc}"/>
+                            Text="{Binding Balance}"/>
                     </VerticalStackLayout>
                 </Border>
             </DataTemplate>

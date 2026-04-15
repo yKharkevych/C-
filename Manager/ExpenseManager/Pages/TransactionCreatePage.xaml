@@ -5,7 +5,7 @@
              Title="Create new Transaction">
     <ScrollView>
         <VerticalStackLayout>
-            <Label 
+            <!--<Label 
                 Text="Description"
                 Margin="80,0,0,0" 
                 FontAttributes="Bold"></Label>
@@ -52,7 +52,7 @@
                     Grid.Column="1"
                     Text="Back"
                     Clicked="BackClicked"></Button>
-            </Grid>
+            </Grid>-->
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>
