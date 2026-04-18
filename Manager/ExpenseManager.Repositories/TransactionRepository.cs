@@ -16,19 +16,29 @@ namespace Manager.ExpenseManager.Repositories
             _storageContext = storageContext;
         }
 
-        public IEnumerable<TransactionDB> GetTransactionsByPurseId(Guid purseId)
+        public Task<IEnumerable<TransactionDB>> GetTransactionsByPurseIdAsync(Guid purseId)
         {
-            return _storageContext.GetTransactionsByPurseId(purseId);
+            return _storageContext.GetTransactionsByPurseIdAsync(purseId);
         }
 
-        public decimal BalanceByPurseId(Guid purseId)
+        public Task<TransactionDB?> GetTransactionByIdAsync(Guid transactionId)
         {
-            return _storageContext.BalanceByPurseId(purseId);
+            return _storageContext.GetTransactionByIdAsync(transactionId);
         }
 
-        public TransactionDB GetTransactionById(Guid transactionId)
+        public Task<decimal> BalanceByPurseIdAsync(Guid purseId)
         {
-            return _storageContext.GetTransactionById(transactionId);
+            return _storageContext.BalanceByPurseIdAsync(purseId);
+        }
+
+        public Task SaveTransactionAsync(TransactionDB transaction)
+        {
+            return _storageContext.SaveTransactionAsync(transaction);
+        }
+
+        public Task DeleteTransactionAsync(Guid transactionId)
+        {
+            return _storageContext.DeleteTransactionAsync(transactionId);
         }
 
     }

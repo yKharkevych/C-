@@ -8,8 +8,10 @@ namespace Manager.ExpenseManager.Repositories
     // Repository interface for accessing transaction data
     public interface ITransactionRepository
     {
-        IEnumerable<TransactionDB> GetTransactionsByPurseId(Guid purseId);
-        TransactionDB GetTransactionById(Guid transactionId);
-        decimal BalanceByPurseId(Guid purseId);
+        Task<IEnumerable<TransactionDB>> GetTransactionsByPurseIdAsync(Guid purseId);
+        Task<TransactionDB?> GetTransactionByIdAsync(Guid transactionId);
+        Task<decimal> BalanceByPurseIdAsync(Guid purseId);
+        Task SaveTransactionAsync(TransactionDB transaction);
+        Task DeleteTransactionAsync(Guid transactionId);
     }
 }

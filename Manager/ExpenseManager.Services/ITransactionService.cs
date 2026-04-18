@@ -9,8 +9,11 @@ namespace Manager.ExpenseManager.Services
     // Service interface for managing transactions
     public interface ITransactionService
     {
-        IEnumerable<TransactionListDTO> GetTransactionsByPurseId(Guid purseId);
-        TransactionDetailsDTO GetTransactionDetails(Guid transactionId);
-
+        Task<IEnumerable<TransactionListDTO>> GetTransactionsByPurseIdAsync(Guid purseId);
+        Task<TransactionDetailsDTO?> GetTransactionDetailsAsync(Guid transactionId);
+        Task<TransactionEditDTO?> GetTransactionForEditAsync(Guid transactionId);
+        Task CreateTransactionAsync(TransactionCreateDTO createDto);
+        Task UpdateTransactionAsync(TransactionEditDTO editDto);
+        Task DeleteTransactionAsync(Guid transactionId);
     }
 }

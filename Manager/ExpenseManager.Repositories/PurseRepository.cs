@@ -11,19 +11,29 @@ namespace Manager.ExpenseManager.Repositories
     {
         private readonly IStorageContext _storageContext;
 
-        public PurseRepository(IStorageContext storageContext) 
+        public PurseRepository(IStorageContext storageContext)
         {
             _storageContext = storageContext;
         }
 
-        public IEnumerable<PurseDB> GetPurses()
+        public Task<IEnumerable<PurseDB>> GetPursesAsync()
         {
-            return _storageContext.GetPurses();
+            return _storageContext.GetPursesAsync();
         }
 
-        public PurseDB GetPurse(Guid id)
+        public Task<PurseDB?> GetPurseAsync(Guid id)
         {
-            return _storageContext.GetPurse(id);
+            return _storageContext.GetPurseAsync(id);
+        }
+
+        public Task SavePurseAsync(PurseDB purse)
+        {
+            return _storageContext.SavePurseAsync(purse);
+        }
+
+        public Task DeletePurseAsync(Guid id)
+        {
+            return _storageContext.DeletePurseAsync(id);
         }
     }
 }

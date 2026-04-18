@@ -8,41 +8,104 @@
              x:DataType="vm:PursesVM"
              Title="PursesPage">
 
-    <!-- Відображення списку гаманців користувача -->
-    <CollectionView
-        ItemsSource="{Binding Purses}"
-        SelectionMode="Single"
-        SelectedItem="{Binding SelectedPurse}"
-        SelectionChangedCommand="{Binding PurseSelectedCommand}"
-        Margin="20">
-        
-        <CollectionView.ItemsLayout>
-            <LinearItemsLayout Orientation="Vertical" ItemSpacing="9" />
-        </CollectionView.ItemsLayout>
-        
-        <CollectionView.ItemTemplate>
-            <DataTemplate
-                x:DataType="models:PurseListDTO">
-                <Border
-                    Stroke="MidnightBlue"
-                    Padding="13"
-                    HorizontalOptions="Fill">
-                    <VerticalStackLayout>
-                        <Label 
-                            FontSize="20"
-                            FontAttributes="Bold"
-                            TextColor="Black">
-                            <MultiBinding
-                                StringFormat="{}{0} ({1})">
-                                <Binding Path="Name"/>
-                                <Binding Path="Currency"/>
-                            </MultiBinding>
-                        </Label>
-                        <Label 
-                            Text="{Binding Balance}"/>
-                    </VerticalStackLayout>
-                </Border>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="+ Add"
+            Command="{Binding AddPurseCommand}" />
+    </ContentPage.ToolbarItems>
+
+    <Grid 
+        RowDefinitions="Auto, Auto, *"
+        IsEnabled="{Binding IsNotBusy}">
+        <Entry 
+            Grid.Row="0"
+            Margin="20,20,20,5"
+            Placeholder="Search by name..."
+            Text="{Binding SearchText, Mode=TwoWay}" />
+        <Grid 
+            Grid.Row="1" 
+            ColumnDefinitions="Auto,*" 
+            Margin="20,5,20,10">
+            <Label 
+                Grid.Column="0"
+                Text="Sort:"
+                VerticalTextAlignment="Center"
+                Margin="0,0,10,0" />
+            <Picker 
+                Grid.Column="1"
+                ItemsSource="{Binding SortOptions}"
+                SelectedItem="{Binding SelectedSortOption, Mode=TwoWay}" />
+        </Grid>
+
+        <CollectionView 
+            Grid.Row="2"
+            ItemsSource="{Binding Purses}"
+            SelectionMode="Single"
+            SelectedItem="{Binding SelectedPurse}"
+            SelectionChangedCommand="{Binding PurseSelectedCommand}"
+            Margin="20,0,20,20">
+            <CollectionView.EmptyView>
+                <Label 
+                    Text="No purses yet. Tap '+ Add' to create one."
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center"
+                    TextColor="Gray" />
+            </CollectionView.EmptyView>
+
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="9" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:PurseListDTO">
+                    <Border 
+                        Stroke="MidnightBlue" 
+                        Padding="17" 
+                        HorizontalOptions="Fill">
+                        <Grid 
+                            ColumnDefinitions="*, Auto" 
+                            ColumnSpacing="10">
+                            <VerticalStackLayout 
+                                Grid.Column="0">
+                                <Label 
+                                    FontSize="20" 
+                                    FontAttributes="Bold" 
+                                    TextColor="Black">
+                                    <MultiBinding StringFormat="{}{0} ({1})">
+                                        <Binding Path="Name"/>
+                                        <Binding Path="Currency"/>
+                                    </MultiBinding>
+                                </Label>
+                                <Label>
+                                    <Label.Text>
+                                        <MultiBinding StringFormat="Balance: {0}">
+                                            <Binding Path="Balance"/>
+                                        </MultiBinding>
+                                    </Label.Text>
+                                </Label>
+                            </VerticalStackLayout>
+
+                            <Button
+                                Grid.Column="1"
+                                Text="Delete"
+                                BackgroundColor="IndianRed"
+                                TextColor="White"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PursesVM}}, Path=DeletePurseCommand}"
+                                CommandParameter="{Binding Id}"
+                                VerticalOptions="Center" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <ActivityIndicator 
+            Grid.Row="0" 
+            Grid.RowSpan="3"
+            IsVisible="{Binding IsBusy}"
+            IsRunning="{Binding IsBusy}"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Color="MidnightBlue" />
+    </Grid>
 </ContentPage>

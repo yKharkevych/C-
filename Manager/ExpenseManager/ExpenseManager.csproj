@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFrameworks>net10.0-windows10.0.19041.0</TargetFrameworks>
@@ -75,21 +75,33 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Pages\PurseCreatePage.xaml.cs">
-	    <DependentUpon>PurseCreatePage.xaml</DependentUpon>
-	  </Compile>
+		<Compile Update="Pages\PurseCreatePage.xaml.cs">
+			<DependentUpon>PurseCreatePage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\PurseEditPage.xaml.cs">
+			<DependentUpon>PurseEditPage.xaml</DependentUpon>
+		</Compile>
+		<Compile Update="Pages\TransactionEditPage.xaml.cs">
+			<DependentUpon>TransactionEditPage.xaml</DependentUpon>
+		</Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Pages\PurseCreatePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\PurseDetailsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\PursesPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<MauiXaml Update="Pages\PurseCreatePage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\PurseEditPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\PurseDetailsPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\PursesPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="Pages\TransactionEditPage.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
 
 </Project>

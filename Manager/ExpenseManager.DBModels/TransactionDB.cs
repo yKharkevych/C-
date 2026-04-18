@@ -7,14 +7,20 @@ namespace Manager.ExpenseManager.DBModels
 {
     public class TransactionDB
     {
-        public Guid Id { get; } // Унікальний ідентифікатор транзакції. Генерується автоматично при створенні нової транзакції і ніколи не змінюється
+        public Guid Id { get; set; } // Унікальний ідентифікатор транзакції. Генерується автоматично при створенні нової транзакції і ніколи не змінюється
 
         //Решту параметрів можна змінити, наприклад, коли були вказані не правильні дані або коли користувач хоче оновити інформацію про транзакцію.
-        public Guid PurseId { get; }
+        public Guid PurseId { get; set; }
         public decimal Amount { get; set; }
         public Category Category { get; set; }
         public DateTime Date { get; set; }
-        public string Description { get; set; }    
+        public string Description { get; set; }
+
+
+        public TransactionDB()
+        {
+            Description = string.Empty;
+        }
 
         public TransactionDB(Guid purseId, decimal amount, Category category, DateTime date, string description) : this(Guid.NewGuid(), purseId, amount, category, date, description)
         {

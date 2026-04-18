@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Manager.ExpenseManager.Pages.PurseCreatePage"
+             Title="PurseCreatePage">
+    <Grid 
+        IsEnabled="{Binding IsNotBusy}">
+        <ScrollView>
+            <VerticalStackLayout 
+                Padding="30,20" 
+                Spacing="15">
+
+                <Label 
+                    Text="Name" 
+                    FontSize="18" 
+                    FontAttributes="Bold" 
+                    TextColor="Black" />
+                <Entry 
+                    Text="{Binding Name, Mode=TwoWay}" />
+
+                <Label 
+                    Text="Currency" 
+                    FontSize="18" 
+                    FontAttributes="Bold" 
+                    TextColor="Black" />
+                <Picker ItemsSource="{Binding Currencies}"
+                        SelectedItem="{Binding SelectedCurrency, Mode=TwoWay}"
+                        ItemDisplayBinding="{Binding DisplayName}" />
+
+                <Label 
+                    Text="Start Balance" 
+                    FontSize="18" 
+                    FontAttributes="Bold" 
+                    TextColor="Black" />
+                <Entry 
+                    Text="{Binding StartBalance, Mode=TwoWay}"
+                    Placeholder="0.00"
+                    Keyboard="Numeric" />
+
+                <Grid 
+                    ColumnDefinitions="*,*" 
+                    ColumnSpacing="15" 
+                    Padding="0,20,0,0">
+                    <Button 
+                        Grid.Column="0"
+                        Text="Create"
+                        BackgroundColor="MidnightBlue"
+                        TextColor="White"
+                        Command="{Binding CreateCommand}" />
+                    <Button 
+                        Grid.Column="1"
+                        Text="Cancel"
+                        BackgroundColor="Gray"
+                        TextColor="White"
+                        Command="{Binding CancelCommand}" />
+                </Grid>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <ActivityIndicator 
+            IsVisible="{Binding IsBusy}"
+            IsRunning="{Binding IsBusy}"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Color="MidnightBlue" />
+    </Grid>
+</ContentPage>

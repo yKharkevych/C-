@@ -8,7 +8,9 @@ namespace Manager.ExpenseManager.Repositories
     // Repository interface for accessing purse data
     public interface IPurseRepository
     {
-        IEnumerable<PurseDB> GetPurses();
-        PurseDB GetPurse(Guid id);
+        Task<IEnumerable<PurseDB>> GetPursesAsync();
+        Task<PurseDB?> GetPurseAsync(Guid id);
+        Task SavePurseAsync(PurseDB purse);
+        Task DeletePurseAsync(Guid id);
     }
 }

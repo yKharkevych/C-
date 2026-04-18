@@ -1,6 +1,5 @@
 <Solution>
   <Project Path="D:/Project_m/Manager/ExpenseManager.Common/ExpenseManager.Common.csproj" />
-  <Project Path="D:/Project_m/Manager/ExpenseManager.Console/ExpenseManager.ConsoleApp.csproj" />
   <Project Path="D:/Project_m/Manager/ExpenseManager.DBModels/ExpenseManager.DBModels.csproj" />
   <Project Path="D:/Project_m/Manager/ExpenseManager.DTOModels/ExpenseManager.DTOModels.csproj" Id="5172ee46-2c2d-42dd-8387-010c9424fc70" />
   <Project Path="D:/Project_m/Manager/ExpenseManager.Repositories/ExpenseManager.Repositories.csproj" Id="4025f937-ad3f-4619-a33d-a5903a93a2b2" />

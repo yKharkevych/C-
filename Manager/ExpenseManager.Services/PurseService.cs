@@ -1,7 +1,9 @@
-﻿using Manager.ExpenseManager.DTOModels.Purses;
+﻿using Manager.ExpenseManager.DBModels;
+using Manager.ExpenseManager.DTOModels.Purses;
 using Manager.ExpenseManager.Repositories;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace Manager.ExpenseManager.Services
@@ -17,22 +19,66 @@ namespace Manager.ExpenseManager.Services
             _purseRepository = purseRepository;
             _transactionRepository = transactionRepository;
         }
-
-        public IEnumerable<PurseListDTO> GetPurses()
+ 
+        public async Task<IEnumerable<PurseListDTO>> GetPursesAsync()
         {
-            foreach (var purse in _purseRepository.GetPurses())
-            { 
-                var balance = _transactionRepository.BalanceByPurseId(purse.Id);
-                yield return new PurseListDTO(purse.Id, purse.Name, purse.Currency, purse.StartBalance, balance);
+            var purses = await _purseRepository.GetPursesAsync();
+            var result = new List<PurseListDTO>();
+            foreach (var purse in purses)
+            {
+                var balance = await _transactionRepository.BalanceByPurseIdAsync(purse.Id);
+                result.Add(new PurseListDTO(purse.Id, purse.Name, purse.Currency, purse.StartBalance, balance));
             }
+            return result;
         }
-
-        public PurseDetailsDTO GetPurse(Guid id)
+ 
+        public async Task<PurseDetailsDTO?> GetPurseAsync(Guid id)
         {
-            var purse = _purseRepository.GetPurse(id)
-                ?? throw new KeyNotFoundException($"Purse with id {id} not found.");
-            var balance = _transactionRepository.BalanceByPurseId(purse.Id);
+            var purse = await _purseRepository.GetPurseAsync(id);
+            if (purse is null)
+                return null;
+            var balance = await _transactionRepository.BalanceByPurseIdAsync(purse.Id);
             return new PurseDetailsDTO(purse.Id, purse.Name, purse.Currency, balance);
+        }
+ 
+        public async Task<PurseEditDTO?> GetPurseForEditAsync(Guid id)
+        {
+            var purse = await _purseRepository.GetPurseAsync(id);
+            return purse is null ? null : new PurseEditDTO(purse.Id, purse.Name);
+        }
+ 
+        public async Task CreatePurseAsync(PurseCreateDTO createDto)
+        {
+            if (createDto == null)
+                throw new ArgumentNullException(nameof(createDto));
+ 
+            var errors = createDto.Validate();
+            if (errors.Count > 0)
+                throw new ValidationException(string.Join(Environment.NewLine, errors.Select(e => e.ErrorMessage)));
+ 
+            var newPurse = new PurseDB(createDto.Name, createDto.Currency, createDto.StartBalance);
+            await _purseRepository.SavePurseAsync(newPurse);
+        }
+ 
+        public async Task UpdatePurseAsync(PurseEditDTO editDto)
+        {
+            if (editDto == null)
+                throw new ArgumentNullException(nameof(editDto));
+ 
+            var errors = editDto.Validate();
+            if (errors.Count > 0)
+                throw new ValidationException(string.Join(Environment.NewLine, errors.Select(e => e.ErrorMessage)));
+ 
+            var existing = await _purseRepository.GetPurseAsync(editDto.Id)
+                ?? throw new KeyNotFoundException($"Purse with id {editDto.Id} not found.");
+ 
+            existing.Name = editDto.Name;
+            await _purseRepository.SavePurseAsync(existing);
+        }
+ 
+        public Task DeletePurseAsync(Guid id)
+        {
+            return _purseRepository.DeletePurseAsync(id);
         }
     }
 }

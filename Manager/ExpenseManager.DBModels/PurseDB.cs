@@ -7,11 +7,16 @@ namespace Manager.ExpenseManager.DBModels
 {
     public class PurseDB
     {
-        public Guid Id { get; } // Унікальний ідентифікатор гаманця. Генерується автоматично при створенні нового гаманця і ніколи не змінюється
+        public Guid Id { get; set; } // Унікальний ідентифікатор гаманця. Генерується автоматично при створенні нового гаманця і ніколи не змінюється
         public string Name { get; set; } // Назва гаманця. Вона може бути змінена користувачем.
-        public Currency Currency { get; } // Валюта гаманця. Встановлюється при створенні гаманця і не може бути змінена пізніше, адже всі операції відбуваються саме з цією валютою.
-        public decimal StartBalance { get; }
+        public Currency Currency { get; set; } // Валюта гаманця. Встановлюється при створенні гаманця і не може бути змінена пізніше, адже всі операції відбуваються саме з цією валютою.
+        public decimal StartBalance { get; set; }
+        
 
+        public PurseDB()
+        {
+
+        }
         public PurseDB(string name, Currency currency, decimal startBlance) : this(Guid.NewGuid(), name, currency, startBlance)
         {
 
